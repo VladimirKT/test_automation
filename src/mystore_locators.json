@@ -1,0 +1,6 @@
+{
+  "sign_in_btn": "//div[@class='nav']/div/div/nav/div/a[@title='Log in to your customer account']",
+  "email_input_field": "//div/form[@id='create-account_form']/div/div/input[@id='email_create']",
+  "create_account_btn": "//div/form[@id='create-account_form']/div/div/button[@id='SubmitCreate']",
+  "account_error": "//div[@id='create_account_error']/ol/li"
+}
