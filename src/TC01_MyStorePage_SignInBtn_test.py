@@ -5,9 +5,9 @@ from pages.mystore_page import MyStorePage
 import json
 
 # Test setup
-with open('mystore_locators.json', 'r') as ms:
+with open('element_locator.json', 'r') as ms:
     data = json.load(ms)
-sign_in_btn = data["sign_in_btn"]
+sign_in_button = data["sign_in_button"]
 browser = webdriver.Chrome()
 browser.maximize_window()
 
@@ -18,7 +18,14 @@ my_store.go()
 
 
 def test_sign_in_btn():
-    my_store.element(sign_in_btn).click()
+    # find and click on sign in button
+    sign_in_btn = my_store.element(sign_in_button)
+    sign_in_btn.find()
+    sign_in_btn.click()
+
+    # compare current url with url after click on sign in button
     current_url = browser.current_url
     assert current_url == sign_in_url
+
+    # close Google Chrome browser
     browser.close()
