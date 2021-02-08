@@ -4,7 +4,7 @@ from selenium import webdriver
 from pages.mystore_page import MyStorePage
 import json
 
-# Test setup
+# # # Test setup
 with open('element_locator.json', 'r') as ms:
     data = json.load(ms)
 sign_in_button = data["sign_in_button"]
@@ -21,8 +21,13 @@ valid_email = "vladimir@test.rs"
 create_acc_url = "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation"
 
 
+# # # TEST
 def test_valid_email():
-
+    """
+    Test Case created to check if entering correct email form
+    and clicking on create account button leads to create account page.
+    Test passes if page url is correct
+    """
     # find and click on sign in button
     sign_in_btn = my_store.element(sign_in_button)
     sign_in_btn.find()

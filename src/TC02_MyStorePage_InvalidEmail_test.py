@@ -4,7 +4,7 @@ from selenium import webdriver
 from pages.mystore_page import MyStorePage
 import json
 
-# Test setup
+# # # Test setup
 with open('element_locator.json', 'r') as ms:
     data = json.load(ms)
 sign_in_button = data["sign_in_button"]
@@ -20,7 +20,13 @@ my_store.go()
 invalid_email = "vladimir@vladimir"
 
 
+# # # TEST
 def test_invalid_email():
+    """
+    Test Case created to check if entering wrong email form
+    and click on create account button leads to alert message.
+    Test passes if alert message "Invalid email address." appears
+    """
     # find and click on sign in button
     sign_in_btn = my_store.element(sign_in_button)
     sign_in_btn.find()

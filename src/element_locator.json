@@ -24,6 +24,12 @@
   "forgot_password_link": "//form[@id='login_form']/div/p/a[@title='Recover your forgotten password']",
   "forgot_pass_email_input": "//form[@id='form_forgotpassword']/fieldset/div/input[@id='email']",
   "retrieve_password_button": "//form[@id='form_forgotpassword']/fieldset/p/button[@type='submit']",
-  "confirmation_password": "//div[@id='center_column']/div/p[@class='alert alert-success']",
-  "sign_out_button": "//div[@class='nav']/div/div/nav/div/a[@title='Log me out']"
+  "reset_password_alert": "//div[@id='center_column']/div/p[@class='alert alert-success']",
+  "sign_out_button": "//div[@class='nav']/div/div/nav/div/a[@title='Log me out']",
+  "account_error": "//div[@id='center_column']/div[@class='alert alert-danger']/p",
+  "product3": "//div[@id='center_column']/ul/li[@class='ajax_block_product col-xs-12 col-sm-6 col-md-4 first-in-line first-item-of-tablet-line first-item-of-mobile-line']",
+  "add_btn_prod3": "//div[@class='button-container']/a[@data-id-product='3']",
+  "add_to_cart": "//div[@id='layer_cart']/div/div/h2",
+  "product4": "//div[@id='center_column']/ul/li[@class='ajax_block_product col-xs-12 col-sm-6 col-md-4 last-item-of-tablet-line']",
+  "more_btn_prod4": "//div[@class='button-container']/a[@href='http://automationpractice.com/index.php?id_product=4&controller=product']"
 }

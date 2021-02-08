@@ -4,7 +4,7 @@ from selenium import webdriver
 from pages.mystore_page import MyStorePage
 import json
 
-# Test setup
+# # # Test setup
 with open('element_locator.json', 'r') as ms:
     data = json.load(ms)
 sign_in_button = data["sign_in_button"]
@@ -25,7 +25,13 @@ my_store = MyStorePage(browser)
 my_store.go()
 
 
+# # # TEST
 def test_account_login():
+    """
+    Test Case created to check if entering correct email and password
+    and clicking on submit login button leads to my account page.
+    Test passes if page url is correct
+    """
     # find and click on sign in button
     sign_in_btn = my_store.element(sign_in_button)
     sign_in_btn.find()

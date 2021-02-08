@@ -11,26 +11,35 @@ sign_in_button = data["sign_in_button"]
 login_email_input_field = data["login_email_input"]
 login_password_input_field = data["login_password_input"]
 submit_login_button = data["submit_login_button"]
-sign_out_button = data["sign_out_button"]
+authentication_error = data["account_error"]
 
 
 browser = webdriver.Chrome()
 browser.maximize_window()
 
-sign_out_url = 'http://automationpractice.com/index.php?controller=authentication&back=my-account'
+my_account_url = 'http://automationpractice.com/index.php?controller=my-account'
+'''
+set valid inputs:
+Before test execution have to set up email and/or password to be incorrect
+'''
+# email_address = "vladimir.kocis.tubic@gmail.com"  # correct email
+email_address = "vlada.kocis.tubic@gmail.com"  # incorrect email
 
-email_address = "vladimir.kocis.tubic@gmail.com"
-acc_password = "testPass1"
+acc_password = "testPass1"  # correct password
+# acc_password = "testPass1_z"  # incorrect password
+
+error_message = 'There is 1 error'
 
 my_store = MyStorePage(browser)
 my_store.go()
 
 
 # # # TEST
-def test_check_out():
+def test_account_login_failed():
     """
-    Test Case created to check if clicking on sign out button leads out from my account page
-    Test passes if page url is correct
+    Test Case created to check if entering incorrect email or/and incorrect password
+    and clicking on sign in button leads to alert message.
+    Test passes if alert message appears
     """
     # find and click on sign in button
     sign_in_btn = my_store.element(sign_in_button)
@@ -52,16 +61,17 @@ def test_check_out():
     submit_login_btn.find()
     submit_login_btn.click()
 
-    # find and click on sign out button
-    sign_out_btn = my_store.element(sign_out_button)
-    sign_out_btn.find()
-    sign_out_btn.click()
+    # find account creation error pop up
+    authentic_error = my_store.element(authentication_error)
+    authentic_error.find()
+    authentic_error_msg = authentic_error.text()
 
-    # compare current url with url after click on sign out button
-    sign_out_btn.url_to_be(sign_out_url)
-    current_url = browser.current_url
-    assert current_url == sign_out_url
+    # compare alert messages if appear
+    assert authentic_error_msg == error_message
 
     # close Google Chrome browser
     browser.close()
+
+
+
 

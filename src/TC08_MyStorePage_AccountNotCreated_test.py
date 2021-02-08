@@ -23,6 +23,7 @@ country_select_tag = data["country_select_tag"]
 country_select_option = data["country_select_option"]
 mobile_phone_input_field = data["mobile_phone_input"]
 submit_account_button = data["submit_account_button"]
+account_creation_error = data["account_error"]
 
 browser = webdriver.Chrome()
 browser.maximize_window()
@@ -32,26 +33,28 @@ my_store.go()
 
 '''
 set valid inputs:
-Change valid_email for every single test run. After account is created with one email address,
-second test run must be with different email. Otherwise, test is going to fail.
-That is not real error (false positive)
-Other inputs (valid_inputs) can stay as is..
+In case that account is created, test failed, alert message didn't appear, 
+for next test execution have to change valid_email.
 '''
 
-# valid_email = "vladimir.kocis.tubic@gmail.com"
-valid_email = "vladi.mir.ktt@gmail.com"
+valid_email = "vlada_mir_kt@gmail.com"
 
-valid_inputs = ['Vladimir', 'Kocis Tubic', "testPass1", "Palmira Toljatija 54", "Belgrade", '3', '11000', "21", "0641754469"]
+valid_inputs = ['Vladimir', 'Kocis Tubic', "testPass2", "Palmira Toljatija 54", "Belgrade", '3', '11000', "21", "0641754469"]
 
 my_account_url = "http://automationpractice.com/index.php?controller=my-account"
+error_message = 'There is 1 error'
 
 
 # # # TEST
-def test_create_account():
+def test_account_not_created():
     """
-    Test Case created to check if populating required input fields
-    and clicking on submit account button leads to my account page.
-    Test passes if page url is correct
+    Test Case created to check if if NOT populating all required input fields
+    and clicking on submit account button leads to alert message.
+    Test passes if alert message appears
+    Note:
+    Every block of code is responsible for different required input field.
+    Before test running please comment one blocks of code
+    to avoid populating required field.
     """
     # find and click on sign in button
     sign_in_btn = my_store.element(sign_in_button)
@@ -118,21 +121,22 @@ def test_create_account():
     country_option.find_select_tag(valid_inputs[7])
 
     # find and populate mobile phone input field
-    mobile_phone_input = my_store.element(mobile_phone_input_field)
-    mobile_phone_input.find()
-    mobile_phone_input.populate_field(valid_inputs[8])
+    # mobile_phone_input = my_store.element(mobile_phone_input_field)
+    # mobile_phone_input.find()
+    # mobile_phone_input.populate_field(valid_inputs[8])
 
     # find and click on submit account button
     submit_acc_btn = my_store.element(submit_account_button)
     submit_acc_btn.find()
     submit_acc_btn.click()
 
-    # compare current url with url after click on submit account button
-    submit_acc_btn.url_to_be(my_account_url)
-    current_url = browser.current_url
-    assert current_url == my_account_url
+    # find account creation error pop up
+    acc_creation_err = my_store.element(account_creation_error)
+    acc_creation_err.find()
+    acc_creation_err_msg = acc_creation_err.text()
 
-    # close Google Chrome browser
+    # compare alert messages if appear
+    assert acc_creation_err_msg == error_message
+
+    # # close Google Chrome browser
     browser.close()
-
-

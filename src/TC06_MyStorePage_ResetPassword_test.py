@@ -4,14 +4,14 @@ from selenium import webdriver
 from pages.mystore_page import MyStorePage
 import json
 
-# Test setup
+# # # Test setup
 with open('element_locator.json', 'r') as ms:
     data = json.load(ms)
 sign_in_button = data["sign_in_button"]
 forgot_password_link = data["forgot_password_link"]
 forgot_pass_email_input_field = data["forgot_pass_email_input"]
 retrieve_password_button = data["retrieve_password_button"]
-confirmation_password_alert = data["confirmation_password"]
+reset_password_alert = data["reset_password_alert"]
 
 browser = webdriver.Chrome()
 browser.maximize_window()
@@ -20,13 +20,19 @@ my_account_url = 'http://automationpractice.com/index.php?controller=my-account'
 
 email_address = "vladimir.kocis.tubic@gmail.com"
 
-password_email_msg = f"A confirmation email has been sent to your address: {email_address}"
+confirmation_email_msg = f"A confirmation email has been sent to your address: {email_address}"
 
 my_store = MyStorePage(browser)
 my_store.go()
 
 
+# # # TEST
 def test_reset_password():
+    """
+    Test Case created to check if entering correct email
+    and clicking on retrieve password button leads to confirmation message.
+    Test passes if confirmation message "A confirmation email has been sent to your address" appears
+    """
     # find and click on sign in button
     sign_in_btn = my_store.element(sign_in_button)
     sign_in_btn.find()
@@ -48,10 +54,10 @@ def test_reset_password():
     retrieve_pass_btn.click()
 
     # find confirmation password alert message and compare with hard coded password email msg
-    confirmation_pass_alert = my_store.element(confirmation_password_alert)
-    confirmation_pass_alert.find()
-    confirmation_pass_msg = confirmation_pass_alert.text()
-    assert confirmation_pass_msg == password_email_msg
+    reset_pass_alert = my_store.element(reset_password_alert)
+    reset_pass_alert.find()
+    reset_password_msg = reset_pass_alert.text()
+    assert reset_password_msg == confirmation_email_msg
 
     # close Google Chrome browser
     browser.close()
